@@ -12,7 +12,7 @@
             <el-input v-model= "loginForm.password" show-password placeholder="Please enter your password" />
           </el-form-item>
           <el-form-item>
-            <el-button style="width:350px" type="primary">Login</el-button>
+            <el-button style="width:350px" type="primary" @click="login">Login</el-button>
           </el-form-item>
         </el-form>
       </el-card>
@@ -54,7 +54,7 @@
     login() {
       this.$refs.form.validate((isOK) => {
         if (isOK) {
-          alert('Login successful')
+          this.$store.dispatch("user/login", this.loginForm)
         }
       })
     }
