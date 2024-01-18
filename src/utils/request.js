@@ -42,13 +42,20 @@ service.interceptors.response.use(
    * Here is just an example
    * You can also judge the status by HTTP Status Code
    */
-  response => {
-    const { data, message, success } = response.data // json
+  async(response) => {
+    const { data, message, success, code } = response.data // json
     if (success) {
       return data
     } else {
-      Message({ type: 'error', message })
-      return Promise.reject(new Error(message))
+      if (code === 10002) {
+        Message({ type: 'warning', message: 'token expired' })
+        await store.dispatch('user/logout')
+        router.push('/login')
+        return Promise.reject(new Error(message))
+      } else {
+        Message({ type: 'error', message })
+        return Promise.reject(new Error(message))
+      }
     }
   },
   async(error) => {
