@@ -18,6 +18,9 @@ router.beforeEach(async(to, from, next) => {
       next('/')
       NProgress.done() // hack: https://github.com/PanJiaChen/vue-element-admin/pull/2939
     } else {
+      if (!store.getters.userId) {
+        await store.dispatch("user/getUserInfo")
+      }
       next()
     }
   } else {
