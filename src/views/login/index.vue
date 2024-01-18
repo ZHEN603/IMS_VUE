@@ -25,11 +25,11 @@
   data() {
     return {
       loginForm: {
-        mobile: '',
+        id: '',
         password: '',
       },
       loginRules: {
-        mobile: [{
+        id: [{
           required: true,
           message: 'Please enter your ID',
           trigger: 'blur'
