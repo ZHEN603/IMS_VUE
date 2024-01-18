@@ -5,6 +5,7 @@ Vue.use(Router)
 
 /* Layout */
 import Layout from '@/layout'
+import categoryRouter from '@/router/modules/category'
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -55,18 +56,21 @@ export const constantRoutes = [
         meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
       }
     ]
-  }
+  },
+  categoryRouter,
+  { path: '*', redirect: '/404', hidden: true }
 ]
 
 /**
  * asyncRoutes
  * the routes that need to be dynamically loaded based on user roles
  */
+
 export const asyncRoutes = [
   /** when your routing map is too long, you can split it into small modules **/
 
   // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/404', hidden: true }
+
 ]
 
 const createRouter = () => new Router({
