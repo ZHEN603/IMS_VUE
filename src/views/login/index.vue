@@ -9,7 +9,7 @@
             <el-input v-model="loginForm.id" placeholder="Please enter your ID" />
           </el-form-item>
           <el-form-item prop="password">
-            <el-input v-model= "loginForm.password" show-password placeholder="Please enter your password" />
+            <el-input v-model="loginForm.password" show-password placeholder="Please enter your password" />
           </el-form-item>
           <el-form-item>
             <el-button style="width:350px" type="primary" @click="login">Login</el-button>
@@ -20,13 +20,13 @@
   </div>
 </template>
 <script>
-  export default {
-  name : "Login",
+export default {
+  name: 'Login',
   data() {
     return {
       loginForm: {
         id: '',
-        password: '',
+        password: ''
       },
       loginRules: {
         id: [{
@@ -46,7 +46,7 @@
           max: 50,
           message: 'Passwprd error',
           trigger: 'blur'
-        }],
+        }]
       }
     }
   },
@@ -54,7 +54,7 @@
     login() {
       this.$refs.form.validate(async(isOK) => {
         if (isOK) {
-          await this.$store.dispatch("user/login", this.loginForm)
+          await this.$store.dispatch('user/login', this.loginForm)
           this.$router.push('/')
         }
       })
