@@ -37,8 +37,14 @@ module.exports = {
       errors: true
     },
     proxy: {
+      '/comapany': {
+        target: 'http://localhost:9001'
+      },
       '/user': {
         target: 'http://localhost:9002'
+      },
+      '/product': {
+        target: 'http://localhost:9003'
       }
     }
     // before: require('./mock/mock-server.js')
