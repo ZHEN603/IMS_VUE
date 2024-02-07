@@ -2,7 +2,7 @@ import router from './router'
 import store from './store'
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
-
+import { asyncRoutes } from './router'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
@@ -19,9 +19,16 @@ router.beforeEach(async(to, from, next) => {
       NProgress.done() // hack: https://github.com/PanJiaChen/vue-element-admin/pull/2939
     } else {
       if (!store.getters.userId) {
-        await store.dispatch("user/getUserInfo")
+        const {roles} = await store.dispatch("user/getUserInfo")
+        const filteredRoutes = asyncRoutes.filter(item =>{
+          return roles.menus.includes(item.path)
+        })
+        store.commit('user/setRoutes', filteredRoutes)
+        router.addRoutes([...filteredRoutes, { path: '*', redirect: '/404', hidden: true }])
+        next(to.path)
+      }else{
+        next()
       }
-      next()
     }
   } else {
     /* has no token*/
