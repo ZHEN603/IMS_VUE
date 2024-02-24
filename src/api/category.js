@@ -1,8 +1,8 @@
 import request from '@/utils/request'
 
-export function getCategory() {
+export function getCategoryList() {
   return request({
-    url: '/product/category'
+    url: '/product/category/list'
   })
 }
 
