@@ -21,6 +21,7 @@ service.interceptors.request.use(
       // please modify it according to the actual situation
       config.headers.Authorization = `Bearer ${store.getters.token}`
     }
+    config.url = `/api${config.url}`;
     return config
   },
   error => {
@@ -45,10 +46,13 @@ service.interceptors.response.use(
   async(response) => {
     const { data, message, success, code } = response.data // json
     if (success) {
+      if (code === 10004) {
+        Message({ type: 'warning', message: 'Please change your password'})
+      }
       return data
     } else {
       if (code === 10002) {
-        Message({ type: 'warning', message: 'token expired' })
+        Message({ type: 'warning', message: 'Please login again' })
         await store.dispatch('user/logout')
         router.push('/login')
         return Promise.reject(new Error(message))
@@ -61,7 +65,7 @@ service.interceptors.response.use(
   async(error) => {
     console.log('err' + error) // for debug
     if (error.response.status === 401) {
-      Message({ type: 'warning', message: 'token expired' })
+      Message({ type: 'warning', message: 'Please login again' })
       await store.dispatch('user/logout')
       router.push('/login')
       return Promise.reject(error)
