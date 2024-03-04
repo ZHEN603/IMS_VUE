@@ -45,6 +45,33 @@ Object.keys(filters).forEach(key => {
 
 Vue.config.productionTip = false
 
+Vue.directive('per-remove', {
+  inserted(el, binding) {
+    const points = store.state.user.userInfo?.roles?.points || []
+    if (!points.includes(binding.expression)) {
+      el.remove()
+    }
+  }
+})
+
+Vue.directive('per-disabled', {
+  inserted(el, binding) {
+    const points = store.state.user.userInfo?.roles?.points || []
+    if (!points.includes(binding.expression)) {
+      el.disabled = true
+    }
+  }
+})
+
+Vue.directive('per-exclued', {
+  inserted(el, binding) {
+    const points = store.state.user.userInfo?.roles?.points || []
+    if (points.includes(binding.expression)) {
+      el.remove()
+    }
+  }
+})
+
 new Vue({
   el: '#app',
   router,
