@@ -31,10 +31,9 @@ export default {
       'routes',
       'sidebar'
     ]),
-    routes() {
-      // 返回所有的路由信息
-      return this.$router.options.routes
-    },
+    // routes() {
+    //   return this.$router.options.routes
+    // },
     activeMenu() {
       const route = this.$route
       const { meta, path } = route
