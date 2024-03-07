@@ -6,6 +6,16 @@ Vue.use(Router)
 /* Layout */
 import Layout from '@/layout'
 import categoryRouter from '@/router/modules/category'
+import roleRouter from '@/router/modules/role'
+import userRouter from '@/router/modules/user'
+import permissionRouter from '@/router/modules/permission'
+import productRouter from '@/router/modules/product'
+import inventoryRouter from '@/router/modules/inventory'
+import supplierRouter from '@/router/modules/supplier'
+import inboundRouter from '@/router/modules/inbound'
+import outboundRouter from './modules/outbound'
+import companyRouter from '@/router/modules/company'
+import accountRouter from '@/router/modules/account'
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -54,11 +64,17 @@ export const constantRoutes = [
         component: () => import('@/views/dashboard/index'),
         name: 'Dashboard',
         meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
+      }, {
+        path: '/profile', // 员工详情的地址
+        component: () => import('@/views/dashboard/profile'),
+        hidden: true, // 表示隐藏在左侧菜单
+        meta: {
+          title: 'Profile' // 显示在导航的文本
+        }
       }
     ]
   },
-  categoryRouter,
-  { path: '*', redirect: '/404', hidden: true }
+
 ]
 
 /**
@@ -67,10 +83,17 @@ export const constantRoutes = [
  */
 
 export const asyncRoutes = [
-  /** when your routing map is too long, you can split it into small modules **/
-
-  // 404 page must be placed at the end !!!
-
+  companyRouter,
+  permissionRouter,
+  roleRouter,
+  userRouter,
+  categoryRouter,
+  productRouter,
+  inventoryRouter,
+  inboundRouter,
+  outboundRouter,
+  supplierRouter,
+  accountRouter
 ]
 
 const createRouter = () => new Router({
