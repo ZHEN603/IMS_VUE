@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ims-vue
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ims-vue
+  template:
+    metadata:
+      labels:
+        app: ims-vue
+    spec:
+      containers:
+      - name: ims-vue
+        image: zhen603/ims-vue:1.4
+        ports:
+        - containerPort: 8080
+
