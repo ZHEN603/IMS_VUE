@@ -37,15 +37,27 @@ module.exports = {
       errors: true
     },
     proxy: {
-      '/comapany': {
-        target: 'http://localhost:9001'
+      // '/': {
+      //   target: 'http://localhost:9000'
+      // },
+      '/': {
+        target: 'http://34.90.38.160/'
       },
-      '/user': {
-        target: 'http://localhost:9002'
-      },
-      '/product': {
-        target: 'http://localhost:9003'
-      }
+      // '/company': {
+      //   target: 'http://localhost:9001'
+      // },
+      // '/user': {
+      //   target: 'http://localhost:9002'
+      // },
+      // '/product': {
+      //   target: 'http://localhost:9003'
+      // },
+      // '/inventory': {
+      //   target: 'http://localhost:9004'
+      // },
+      // '/supplier': {
+      //   target: 'http://localhost:9005'
+      // }
     }
     // before: require('./mock/mock-server.js')
   },
